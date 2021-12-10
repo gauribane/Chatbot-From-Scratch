@@ -158,3 +158,40 @@
     border-bottom-right-radius: 10px;
     color: white;
 }
+
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .options-button {
+    margin: 5px;
+    border-radius: 25px;
+    padding: 8px;
+    border-color: blue;
+    background: transparent;
+    text-align: center;
+  }
+
+  .links-container {
+    display: flex;
+    flex-flow: column;
+    /* flex-wrap: wrap; */
+  }
+
+  .links-button{
+    /* margin: 5px; */
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding: 8px;
+    border-color: #d8d8d8;
+    background: #d8d8d8;
+    text-align: left;
+    /* background-color: gray;
+    text-align: left;
+    padding: 5px;
+    width: 70%;
+    color: blue; */
+  }
+
+  

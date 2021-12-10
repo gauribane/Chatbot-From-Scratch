@@ -1,5 +1,5 @@
 import React,{Fragment} from "react";
-import "./style.css"
+import "./style.css";
 
 const Msg=(props)=>{
     return(
