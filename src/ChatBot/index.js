@@ -54,36 +54,36 @@ const ChatBot = () => {
     setMessage("");
   };
 
-  const clickOnOption=(option) => {
+  const clickOnOption = (option) => {
     chats = [
       ...chats,
       {
-        Message:option.name,
+        Message: option.name,
         incomingMsg: true,
         option: false,
-        link:true,
+        link: true,
         links: option.links,
       },
     ];
     setChatList([...chats].reverse());
     return;
-  }
+  };
 
-  const openLinkInNewTab=(link)=>{
+  const openLinkInNewTab = (link) => {
     chats = [
       ...chats,
       {
-        Message:`Great.Enjoy your ${link.linkName}.`,
+        Message: `Great.Enjoy your ${link.linkName}.`,
         incomingMsg: true,
         option: false,
-        link:false
+        link: false,
       },
     ];
     setChatList([...chats].reverse());
-    const newWindow = window.open(link.url, '_blank', 'noopener,noreferrer')
-        if (newWindow) newWindow.opener = null
+    const newWindow = window.open(link.url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
     return;
-  }
+  };
 
   return (
     <div className="chatBox">
@@ -97,30 +97,32 @@ const ChatBot = () => {
                 Message={item.Message}
                 sentMsg={item.sentMsg}
               />
-              {item.option && <div className="options-container">
-                {item.options.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={()=>clickOnOption(option)}
-                  className="options-button"
-                >
-                  {option.name}
-                </button>
-                ))}
-              </div>
-              }
-               {item.link && <div className="links-container">
-                {item.links.map((link) => (
-                <p
-                  key={link.id}
-                  onClick={()=>openLinkInNewTab(link)}
-                  className="links-button"
-                >
-                  {link.linkName}
-                </p>
-                ))}
-              </div>
-              }
+              {item.option && (
+                <div className="options-container">
+                  {item.options.map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={() => clickOnOption(option)}
+                      className="options-button"
+                    >
+                      {option.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {item.link && (
+                <div className="links-container">
+                  {item.links.map((link) => (
+                    <p
+                      key={link.id}
+                      onClick={() => openLinkInNewTab(link)}
+                      className="links-button"
+                    >
+                      {link.linkName}
+                    </p>
+                  ))}
+                </div>
+              )}
             </>
           ))}
         </>

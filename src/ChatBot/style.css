@@ -25,15 +25,6 @@
 }
 
 .chat-container{
-    /* min-width: 300px;
-    max-width: 500px;
-    max-height: 700px;
-    height: 90vh;
-    background: #FFF;
-    border-radius: 10px;
-    padding: 15px;
-    overflow: auto;*/
-    
     padding: 0 17.5px 10px 17.5px;
     overflow: scroll;
     height: 424px;
@@ -176,22 +167,15 @@
   .links-container {
     display: flex;
     flex-flow: column;
-    /* flex-wrap: wrap; */
   }
 
   .links-button{
-    /* margin: 5px; */
     margin-top: 0;
     margin-bottom: 1rem;
     padding: 8px;
     border-color: #d8d8d8;
     background: #d8d8d8;
     text-align: left;
-    /* background-color: gray;
-    text-align: left;
-    padding: 5px;
-    width: 70%;
-    color: blue; */
   }
 
   

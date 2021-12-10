@@ -1,16 +1,12 @@
-import React from 'react';
-import ChatBot from '../../ChatBot';
-
+import React from "react";
+import ChatBot from "../../ChatBot";
 
 const CustomChatBot = () => {
-//   let userName=window.localStorage.getItem('userName')!==null?(JSON.parse(window.localStorage.getItem('userName'))):null;
- 
-  
   return (
     <div>
-      <ChatBot/>
+      <ChatBot />
     </div>
   );
 };
 
-export default CustomChatBot
+export default CustomChatBot;
