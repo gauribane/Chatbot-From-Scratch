@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Msg from "./msg";
-import "./style.css";
 import { data } from "./data/data";
 import { options } from "./data/options";
+import { useNavigate } from "react-router-dom";
+import scrollToBottom from './commonFunc'
+import "./style.css";
+
 
 let chats = [];
 const ChatBot = () => {
   const [message, setMessage] = useState("");
   const [chatList, setChatList] = useState([]);
-
+  let navigate = useNavigate();
+ 
+  const userName =
+  window.localStorage.getItem("userName") !== null
+    ? JSON.parse(window.localStorage.getItem("userName"))
+    : null;
   useEffect(() => {
-    let userName =
-      window.localStorage.getItem("userName") !== null
-        ? JSON.parse(window.localStorage.getItem("userName"))
-        : null;
+        if(!userName){
+          setChatList([]);
+          navigate("/");
+        }
     chats = [
       ...chats,
       { Message: `Hello ${userName}. Welcome.`, incomingMsg: true },
     ];
-    setChatList([...chats].reverse());
-  }, []);
+    setChatList(chats);
+  }, [navigate,userName]);
+
+
 
   const getAnswer = (q) => {
     for (let i = 0; i < data.length; i++) {
@@ -27,7 +37,7 @@ const ChatBot = () => {
         data[i].question.toLocaleLowerCase().includes(q.toLocaleLowerCase())
       ) {
         chats = [...chats, { Message: data[i].answer, incomingMsg: true }];
-        setChatList([...chats].reverse());
+        setChatList(chats);
         return;
       }
     }
@@ -41,18 +51,21 @@ const ChatBot = () => {
         options: options,
       },
     ];
-    setChatList([...chats].reverse());
+    setChatList(chats);
+    scrollToBottom('chat-container');
     return;
   };
   //
   const onSendMsg = () => {
     chats = [...chats, { Message: message, sentMsg: true }];
-    setChatList([...chats].reverse());
+    setChatList(chats);
     setTimeout(() => {
       getAnswer(message);
     }, 1000);
+
     setMessage("");
   };
+  
 
   const clickOnOption = (option) => {
     chats = [
@@ -65,7 +78,8 @@ const ChatBot = () => {
         links: option.links,
       },
     ];
-    setChatList([...chats].reverse());
+    setChatList(chats);
+    scrollToBottom('chat-container');
     return;
   };
 
@@ -79,11 +93,16 @@ const ChatBot = () => {
         link: false,
       },
     ];
-    setChatList([...chats].reverse());
+    setChatList(chats);
+    scrollToBottom('chat-container');
     const newWindow = window.open(link.url, "_blank", "noopener,noreferrer");
     if (newWindow) newWindow.opener = null;
     return;
   };
+
+  function onKeyUp(event){
+    event.charCode === 13 && onSendMsg()
+}
 
   return (
     <div className="chatBox">
@@ -133,7 +152,7 @@ const ChatBot = () => {
           className="typeMessageBox"
           value={message}
           placeholder="Type here..."
-          onKeyDown={(e) => e.key === "Enter" && onSendMsg}
+          onKeyPress={onKeyUp}
           onChange={(event) => setMessage(event.target.value)}
         />
         <button

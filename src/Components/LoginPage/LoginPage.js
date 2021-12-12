@@ -17,8 +17,16 @@ export default function LoginPage() {
   const handlerLogin = () => {
     window.localStorage.setItem("userName", JSON.stringify(userName));
     setUserName(userName);
-    navigate("/chatbot");
+    if(userName)
+      navigate("/chatbot");
+    else  
+      return;
   };
+
+
+function onKeyUp(event){
+    event.charCode === 13 && handlerLogin()
+}
 
   return (
     <>
@@ -26,6 +34,7 @@ export default function LoginPage() {
         <input
           type="text"
           placeholder="Enter your name"
+          onKeyPress={onKeyUp}
           onChange={(event) => {
             setUserName(event.target.value);
           }}

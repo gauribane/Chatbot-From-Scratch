@@ -2,13 +2,14 @@
     min-width: 300px;
     max-width: 500px;
     max-height: 700px;
-    height: 90vh;
+    /* height: 90vh; */
     background: #FFF;
     border-radius: 10px;
     padding: 15px;
     overflow: auto;
     display: flex;
     flex-flow: column;
+    
 }
 
 .chat-header{
@@ -26,8 +27,9 @@
 
 .chat-container{
     padding: 0 17.5px 10px 17.5px;
-    overflow: scroll;
+    /* overflow: scroll; */
     height: 424px;
+    overflow-y: auto;
    
 }
 
