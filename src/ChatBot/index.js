@@ -3,33 +3,31 @@ import Msg from "./msg";
 import { data } from "./data/data";
 import { options } from "./data/options";
 import { useNavigate } from "react-router-dom";
-import scrollToBottom from './commonFunc'
+import scrollToBottom from "./commonFunc";
 import "./style.css";
-
 
 let chats = [];
 const ChatBot = () => {
   const [message, setMessage] = useState("");
   const [chatList, setChatList] = useState([]);
   let navigate = useNavigate();
- 
+
   const userName =
-  window.localStorage.getItem("userName") !== null
-    ? JSON.parse(window.localStorage.getItem("userName"))
-    : null;
+    window.localStorage.getItem("userName") !== null
+      ? JSON.parse(window.localStorage.getItem("userName"))
+      : null;
   useEffect(() => {
-        if(!userName){
-          setChatList([]);
-          navigate("/");
-        }
-    chats = [
-      ...chats,
-      { Message: `Hello ${userName}. Welcome.`, incomingMsg: true },
-    ];
+    if (userName) {
+      chats = [
+        ...chats,
+        { Message: `Hello ${userName}. Welcome.`, incomingMsg: true },
+      ];
+    } else {
+      chats = [];
+      navigate("/");
+    }
     setChatList(chats);
-  }, [navigate,userName]);
-
-
+  }, [navigate, userName]);
 
   const getAnswer = (q) => {
     for (let i = 0; i < data.length; i++) {
@@ -52,7 +50,7 @@ const ChatBot = () => {
       },
     ];
     setChatList(chats);
-    scrollToBottom('chat-container');
+    scrollToBottom("chat-container");
     return;
   };
   //
@@ -65,7 +63,6 @@ const ChatBot = () => {
 
     setMessage("");
   };
-  
 
   const clickOnOption = (option) => {
     chats = [
@@ -79,7 +76,7 @@ const ChatBot = () => {
       },
     ];
     setChatList(chats);
-    scrollToBottom('chat-container');
+    scrollToBottom("chat-container");
     return;
   };
 
@@ -94,15 +91,15 @@ const ChatBot = () => {
       },
     ];
     setChatList(chats);
-    scrollToBottom('chat-container');
+    scrollToBottom("chat-container");
     const newWindow = window.open(link.url, "_blank", "noopener,noreferrer");
     if (newWindow) newWindow.opener = null;
     return;
   };
 
-  function onKeyUp(event){
-    event.charCode === 13 && onSendMsg()
-}
+  function onKeyUp(event) {
+    event.charCode === 13 && onSendMsg();
+  }
 
   return (
     <div className="chatBox">
